@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --saffron: #FF6B00;
+  --saffron-light: #FFF3E6;
+  --india-green: #128807;
+  --india-green-light: #E8F5E9;
+  --navy: #1A3C6E;
+  --navy-light: #EBF0FA;
+  --gold: #D4A017;
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --border: #E5E7EB;
+  --bg-subtle: #F9FAFB;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-noto), 'Noto Sans', sans-serif;
+  color: var(--text-primary);
+}
+
+/* Tricolor top bar */
+.tricolor-bar {
+  background: linear-gradient(to right, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #128807 66.66%);
+  height: 4px;
+  width: 100%;
+}
+
+/* Scheme card hover */
+.scheme-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.scheme-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* Category badge */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Breadcrumb */
+.breadcrumb-nav a {
+  color: var(--navy);
+  text-decoration: none;
+}
+.breadcrumb-nav a:hover {
+  text-decoration: underline;
+}
+
+/* Summary table */
+.scheme-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.scheme-summary-table tr:nth-child(even) {
+  background: var(--bg-subtle);
+}
+.scheme-summary-table td {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+}
+.scheme-summary-table td:first-child {
+  font-weight: 600;
+  width: 45%;
+  background: var(--navy-light);
+  color: var(--navy);
+}
+
+/* FAQ accordion */
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-question {
+  cursor: pointer;
+  padding: 14px 0;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.faq-answer {
+  padding-bottom: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Ad wrapper label */
+.ad-label {
+  font-size: 10px;
+  color: #9CA3AF;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* State grid */
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .state-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Sticky sidebar */
+@media (min-width: 1024px) {
+  .sidebar-sticky {
+    position: sticky;
+    top: 80px;
+  }
+}
+
+/* Popular badge */
+.popular-badge {
+  background: #FEF3C7;
+  color: #92400E;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Section heading with tricolor accent */
+.section-heading {
+  position: relative;
+  padding-left: 14px;
+}
+.section-heading::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #FF9933, #FFFFFF, #128807);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #F1F5F9; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
