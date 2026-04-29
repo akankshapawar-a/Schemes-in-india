@@ -10,19 +10,56 @@ interface AdUnitProps {
   layoutKey?: string;
 }
 
-// Replace with your actual AdSense publisher ID: ca-pub-XXXXXXXXXXXXXXXXX
-const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXXX";
+// Set NEXT_PUBLIC_ADSENSE_CLIENT_ID in your .env.local once you have a real publisher ID.
+// Until then, ads show a grey placeholder and no 400 errors are thrown.
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "";
+const ADS_ENABLED =
+  ADSENSE_CLIENT.startsWith("ca-pub-") &&
+  ADSENSE_CLIENT !== "ca-pub-XXXXXXXXXXXXXXXXX";
 
-export default function AdUnit({ slot, format = "auto", className = "", style, layoutKey }: AdUnitProps) {
+export default function AdUnit({
+  slot,
+  format = "auto",
+  className = "",
+  style,
+  layoutKey,
+}: AdUnitProps) {
   useEffect(() => {
+    if (!ADS_ENABLED) return;
     try {
       // @ts-ignore
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {}
   }, []);
 
+  if (!ADS_ENABLED) {
+    return (
+      <div
+        className={`ad-unit-wrapper ${className}`}
+        style={{
+          overflow: "hidden",
+          textAlign: "center",
+          background: "#F3F4F6",
+          borderRadius: 6,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#9CA3AF",
+          fontSize: 12,
+          minHeight: 60,
+          ...style,
+        }}
+      >
+        Ad Placeholder
+      </div>
+    );
+  }
+
   return (
-    <div className={`ad-unit-wrapper ${className}`} style={{ overflow: "hidden", textAlign: "center", ...style }}>
+    <div
+      className={`ad-unit-wrapper ${className}`}
+      style={{ overflow: "hidden", textAlign: "center", ...style }}
+    >
       <ins
         className="adsbygoogle"
         style={{ display: "block", ...style }}
@@ -36,9 +73,6 @@ export default function AdUnit({ slot, format = "auto", className = "", style, l
   );
 }
 
-// ── Preconfigured Ad placements ─────────────────────────────────────────────
-
-// Top of page — below header (leaderboard)
 export function AdTopBanner() {
   return (
     <div className="w-full bg-gray-50 border-y border-gray-200 py-2 my-3">
@@ -48,7 +82,6 @@ export function AdTopBanner() {
   );
 }
 
-// Mid-content ad (300x250 rectangle — highest CTR)
 export function AdMidContent() {
   return (
     <div className="my-6 flex justify-center">
@@ -60,7 +93,6 @@ export function AdMidContent() {
   );
 }
 
-// In-feed / native content ad
 export function AdInFeed() {
   return (
     <div className="my-4 rounded-lg overflow-hidden border border-gray-100">
@@ -70,7 +102,6 @@ export function AdInFeed() {
   );
 }
 
-// Sidebar sticky ad (300x600)
 export function AdSidebar() {
   return (
     <div className="sticky top-4">
@@ -80,7 +111,6 @@ export function AdSidebar() {
   );
 }
 
-// Below FAQ / end of article
 export function AdEndArticle() {
   return (
     <div className="w-full mt-6">
@@ -90,7 +120,6 @@ export function AdEndArticle() {
   );
 }
 
-// Mobile sticky footer (shown only on mobile)
 export function AdMobileSticky() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 md:hidden">

@@ -69,14 +69,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${notoSans.variable} ${notoDevanagari.variable}`}>
       <head>
-        {/* Google AdSense — replace with your publisher ID */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-        {/* Organization Schema */}
+        {/*
+          Google AdSense: uncomment the Script below and replace the client ID with
+          your real publisher ID from adsense.google.com once your account is approved.
+          Leaving a fake ID active causes 400 errors in the browser console.
+
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_REAL_PUBLISHER_ID"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        */}
         <Script id="org-schema" type="application/ld+json" strategy="beforeInteractive">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -87,7 +91,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             sameAs: ["https://twitter.com/schemesindia", "https://facebook.com/schemesindia"],
           })}
         </Script>
-        {/* Website Schema */}
         <Script id="website-schema" type="application/ld+json" strategy="beforeInteractive">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -96,13 +99,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             url: "https://schemesindia.in",
             potentialAction: {
               "@type": "SearchAction",
-              target: { "@type": "EntryPoint", urlTemplate: "https://schemesindia.in/search?q={search_term_string}" },
+              target: {
+                "@type": "EntryPoint",
+                urlTemplate: "https://schemesindia.in/search?q={search_term_string}",
+              },
               "query-input": "required name=search_term_string",
             },
           })}
         </Script>
       </head>
-      <body className="font-[var(--font-noto)] bg-white text-gray-900 antialiased">
+      {/* pb-16 on mobile ensures the fixed AdMobileSticky bar never covers clickable content */}
+      <body className="font-[var(--font-noto)] bg-white text-gray-900 antialiased pb-16 md:pb-0">
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
