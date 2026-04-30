@@ -5,12 +5,15 @@ export interface Scheme {
   title: string;
   shortTitle: string;
   description: string;
+  descriptionHindi?: string;     // Hindi description shown on bilingual toggle
   benefit: string;
+  benefitHindi?: string;
   category: "agriculture" | "education" | "health" | "housing" | "employment" | "women" | "finance" | "infrastructure";
   eligibility: string[];
   documents: string[];
   applyLink: string;
   launchYear: number;
+  lastUpdated?: string;          // ISO date — update this whenever you edit the scheme info
   keywords: string[];
   faqs: { q: string; a: string }[];
   isPopular?: boolean;
@@ -75,6 +78,9 @@ export const centralSchemes: Scheme[] = [
     launchYear: 2023,
     keywords: ["pm vishwakarma yojana registration", "vishwakarma yojana login", "pm vishwakarma documents", "vishwakarma yojana eligibility", "vishwakarma yojana loan"],
     isPopular: true,
+    lastUpdated: "2025-04-30",
+    descriptionHindi: "पीएम विश्वकर्मा योजना 2023 में शुरू की गई एक केंद्र सरकार की योजना है जो पारंपरिक कारीगरों और शिल्पकारों को कौशल प्रशिक्षण, टूलकिट सहायता और कोलैटरल-फ्री लोन प्रदान करती है।",
+    benefitHindi: "5% ब्याज पर ₹3 लाख तक का लोन + ₹15,000 टूलकिट + मुफ्त कौशल प्रशिक्षण",
     faqs: [
       { q: "What is PM Vishwakarma Yojana?", a: "PM Vishwakarma Yojana is a central government scheme launched on September 17, 2023 to support traditional artisans and craftspeople with skill training, toolkit support, and collateral-free loans." },
       { q: "Who is eligible for PM Vishwakarma Yojana?", a: "Any traditional artisan or craftsperson who works with hands and tools, belongs to one of the 18 eligible trades, is 18+ years old, and is self-employed can apply." },
@@ -99,6 +105,9 @@ export const centralSchemes: Scheme[] = [
     launchYear: 2016,
     keywords: ["pm awas yojana list 2025", "pradhan mantri awas yojana apply", "pmay registration", "awas yojana gramin"],
     isPopular: true,
+    lastUpdated: "2025-04-22",
+    descriptionHindi: "प्रधानमंत्री आवास योजना ग्रामीण और शहरी क्षेत्रों में बेघर और कच्चे मकान में रहने वाले परिवारों को पक्का मकान बनाने के लिए वित्तीय सहायता प्रदान करती है।",
+    benefitHindi: "ग्रामीण में ₹1.20 लाख से शहरी में ₹2.67 लाख तक की आवास सब्सिडी",
     faqs: [
       { q: "What is PM Awas Yojana?", a: "PM Awas Yojana is a flagship housing scheme providing financial assistance to economically weaker sections to construct or purchase a pucca house." },
       { q: "How much subsidy is given under PMAY?", a: "Under PMAY-Gramin, ₹1.20 lakh is given in plain areas and ₹1.30 lakh in hilly/difficult areas. Under PMAY-Urban, interest subsidy up to ₹2.67 lakh is provided." },
@@ -119,6 +128,9 @@ export const centralSchemes: Scheme[] = [
     launchYear: 2019,
     keywords: ["pm kisan status", "pm kisan 18th installment", "pm kisan beneficiary list", "pm kisan registration"],
     isPopular: true,
+    lastUpdated: "2025-04-28",
+    descriptionHindi: "पीएम किसान सम्मान निधि योजना के तहत भारत सरकार सभी भूमिधारक किसान परिवारों को प्रतिवर्ष ₹6,000 की आय सहायता तीन बराबर किस्तों में सीधे बैंक खाते में देती है।",
+    benefitHindi: "हर साल ₹6,000 सीधे बैंक खाते में — तीन किस्तों में ₹2,000 प्रत्येक",
     faqs: [
       { q: "When is the next PM Kisan installment?", a: "PM Kisan instalments are released 3 times a year — April-July, August-November, and December-March. The exact date is announced by the government." },
       { q: "How to check PM Kisan status?", a: "Go to pmkisan.gov.in, click 'Beneficiary Status', enter your Aadhaar number or mobile number to check your payment status." },
@@ -137,6 +149,9 @@ export const centralSchemes: Scheme[] = [
     launchYear: 2018,
     keywords: ["ayushman bharat card download", "pm jan arogya yojana eligibility", "ayushman card apply online", "pmjay hospital list"],
     isPopular: true,
+    lastUpdated: "2025-04-25",
+    descriptionHindi: "आयुष्मान भारत पीएम-जेएवाई योजना आर्थिक रूप से कमजोर परिवारों को माध्यमिक और तृतीयक अस्पताल भर्ती के लिए प्रति परिवार प्रति वर्ष ₹5 लाख का मुफ्त स्वास्थ्य बीमा प्रदान करती है।",
+    benefitHindi: "₹5 लाख प्रति परिवार प्रति वर्ष मुफ्त स्वास्थ्य बीमा",
     faqs: [
       { q: "Who is eligible for Ayushman Bharat?", a: "Families listed in the SECC 2011 database, including rural families with deprived categories and urban workers in 11 occupational categories." },
       { q: "How to download Ayushman Card?", a: "Visit beneficiary.nha.gov.in, enter your mobile number, verify OTP, and download your Ayushman Bharat health card." },

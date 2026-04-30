@@ -29,6 +29,9 @@ export default function Header() {
             <Link href="/schemes" className="px-3 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">All Schemes</Link>
             <Link href="/states" className="px-3 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">State Wise</Link>
             <Link href="/central" className="px-3 py-2 rounded hover:bg-gray-100 font-medium text-gray-700">Central Govt</Link>
+            <Link href="/blog" className="px-3 py-2 rounded hover:bg-gray-100 font-medium text-[#FF6B00] flex items-center gap-1">
+              <span className="text-xs">📰</span> Updates
+            </Link>
 
             {/* Category dropdown */}
             <div className="relative group">
@@ -80,6 +83,7 @@ export default function Header() {
               { href: "/schemes", label: "All Schemes" },
               { href: "/states", label: "State Wise Schemes" },
               { href: "/central", label: "Central Government Schemes" },
+              { href: "/blog", label: "📰 News & Updates" },
             ].map((item) => (
               <Link
                 key={item.href}

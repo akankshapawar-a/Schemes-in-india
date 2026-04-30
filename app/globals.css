@@ -162,3 +162,18 @@ body {
 ::-webkit-scrollbar-track { background: #F1F5F9; }
 ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* Blog article prose styles */
+.prose-article h2 { font-size: 16px; font-weight: 700; color: #111827; margin: 1.5rem 0 0.75rem; padding-left: 14px; border-left: 4px solid #1A3C6E; border-radius: 2px; }
+.prose-article h3 { font-size: 14px; font-weight: 700; color: #1f2937; margin: 1.25rem 0 0.5rem; }
+.prose-article p { color: #374151; line-height: 1.8; margin-bottom: 1rem; }
+.prose-article ul, .prose-article ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+.prose-article li { color: #374151; line-height: 1.8; margin-bottom: 0.4rem; }
+.prose-article ul li { list-style-type: disc; }
+.prose-article ol li { list-style-type: decimal; }
+.prose-article strong { font-weight: 700; color: #111827; }
+.prose-article a { color: #1A3C6E; text-decoration: underline; }
+.prose-article a:hover { color: #FF6B00; }
+
+/* Devanagari font class */
+.font-devanagari { font-family: var(--font-devanagari), 'Noto Sans Devanagari', sans-serif; }

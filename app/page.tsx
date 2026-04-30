@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { centralSchemes, states, categories } from "@/lib/schemes-data";
+import { getRecentArticles } from "@/lib/news-data";
 import { AdTopBanner, AdMidContent, AdInFeed, AdEndArticle } from "@/components/AdUnit";
 import SchemeCard from "@/components/SchemeCard";
 import StateCard from "@/components/StateCard";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 
 const popularSchemes = centralSchemes.filter((s) => s.isPopular);
 const recentSchemes = centralSchemes.slice(0, 6);
+const latestNews = getRecentArticles(4);
 
 export default function HomePage() {
   return (
@@ -160,29 +162,57 @@ export default function HomePage() {
               </div>
             </section>
 
+            {/* Latest news / blog section */}
+            <section className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-gray-900 section-heading">
+                  📰 Latest Updates & News
+                </h2>
+                <Link href="/blog" className="text-sm text-[#1A3C6E] font-medium hover:underline">
+                  All Articles →
+                </Link>
+              </div>
+              <div className="space-y-3">
+                {latestNews.map((article) => (
+                  <Link
+                    key={article.slug}
+                    href={`/blog/${article.slug}`}
+                    className="flex items-start gap-3 p-3 border border-gray-200 rounded-xl hover:border-[#1A3C6E] hover:bg-blue-50/50 transition-all group block"
+                  >
+                    <span className="text-xl shrink-0 mt-0.5">📄</span>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-[#1A3C6E] text-sm leading-snug line-clamp-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-xs text-gray-400 mt-0.5">
+                        {new Date(article.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                      </p>
+                    </div>
+                    <span className="text-xs text-[#1A3C6E] font-medium shrink-0 mt-1">Read →</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
             <AdEndArticle />
           </div>
+
 
           {/* ── Sidebar ──────────────────────────────────────────────── */}
           <aside className="hidden lg:block w-[300px] shrink-0">
             <div className="sidebar-sticky space-y-5">
-              {/* Sidebar Ad */}
               <div>
                 <p className="text-[10px] text-gray-400 text-center mb-1 uppercase tracking-wide">Advertisement</p>
                 <div className="bg-gray-100 rounded-lg" style={{ width: 300, height: 250 }} />
               </div>
 
-              {/* Quick links */}
               <div className="border border-gray-200 rounded-xl p-4">
-                <h3 className="font-bold text-gray-900 mb-3 text-sm section-heading">⭐ Most Popular</h3>
+                <h3 className="font-bold text-gray-900 mb-3 text-sm section-heading">Most Popular Schemes</h3>
                 <ul className="space-y-2">
-                  {centralSchemes.map((s) => (
+                  {centralSchemes.filter((s) => s.isPopular).map((s) => (
                     <li key={s.slug}>
-                      <Link
-                        href={`/central/${s.slug}`}
-                        className="flex items-start gap-2 text-sm text-gray-700 hover:text-[#1A3C6E] group"
-                      >
-                        <span className="text-[#FF6B00] mt-0.5">›</span>
+                      <Link href={`/central/${s.slug}`} className="flex items-start gap-2 text-sm text-gray-700 hover:text-[#1A3C6E] group">
+                        <span className="text-[#FF6B00] mt-0.5">&#8250;</span>
                         <span className="group-hover:underline line-clamp-2">{s.title}</span>
                       </Link>
                     </li>
@@ -190,18 +220,25 @@ export default function HomePage() {
                 </ul>
               </div>
 
-              {/* Important notice */}
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-                <h3 className="font-bold text-amber-800 text-sm mb-2">⚠️ Important Note</h3>
+                <h3 className="font-bold text-amber-800 text-sm mb-2">Important Note</h3>
                 <p className="text-xs text-amber-700 leading-relaxed">
-                  This website is not affiliated with any government body. Information is provided for reference only. Always verify on official government portals before applying.
+                  This website is not affiliated with any government body. Information is for reference only. Always verify on official portals before applying.
                 </p>
               </div>
 
-              {/* Second sidebar ad */}
-              <div>
-                <p className="text-[10px] text-gray-400 text-center mb-1 uppercase tracking-wide">Advertisement</p>
-                <div className="bg-gray-100 rounded-lg" style={{ width: 300, height: 250 }} />
+              <div className="border border-gray-200 rounded-xl p-4">
+                <h3 className="font-bold text-gray-900 mb-3 text-sm section-heading">Latest Updates</h3>
+                <ul className="space-y-2">
+                  {latestNews.map((a) => (
+                    <li key={a.slug}>
+                      <Link href={`/blog/${a.slug}`} className="flex items-start gap-2 text-sm text-gray-700 hover:text-[#1A3C6E] group">
+                        <span className="text-[#FF6B00] mt-0.5">&#8250;</span>
+                        <span className="group-hover:underline line-clamp-2">{a.title}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </aside>
